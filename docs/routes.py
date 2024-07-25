@@ -3,6 +3,7 @@ from docs import login_user, logout_user, current_user, login_required
 from docs.forms import RegisterForm, LoginForm
 from docs.models import User
 
+
 @app.route("/")
 def index_page():
   return render_template("base.html")
@@ -45,7 +46,21 @@ def login_page():
 
   return render_template("login.html", form = form)
 
+@login_required #Execute before setting up the route 
+@app.route('/logout', methods = ["POST","GET"])
+def logout_page():
+    logout_user()
+    return redirect(url_for("login_page"))
+
 @login_required #Require login before the route is set up
 @app.route("/dashboard", methods = ["POST", "GET"])
 def dashboard_page():
   return render_template("dashboard.html")
+
+@login_required #Require login before the route is set up
+@app.route("/admin", methods = ["POST", "GET"])
+def admin_page():
+  if current_user.isAdmin == False: 
+      return redirect("login_page")
+  return render_template("admin/index.html")
+

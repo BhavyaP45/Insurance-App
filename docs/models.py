@@ -1,4 +1,5 @@
-from docs import app, db, UserMixin, bcrypt, loginmanager
+from docs import app, db, UserMixin, bcrypt, loginmanager, admin
+
 
 @loginmanager.user_loader #Required property for the users to be authenticated
 def load_user(user_id):
