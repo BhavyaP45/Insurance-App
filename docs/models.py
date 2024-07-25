@@ -29,5 +29,6 @@ class User(db.Model, UserMixin): #Use UserMixin class to add prexisting methods
 class Insurance(db.Model):
    id = db.Column(db.Integer(), primary_key = True)
    title =  db.Column(db.String(length = 45), nullable = False)
+   owner = db.Column(db.Integer(), db.ForeignKey("user.id")) 
    
   

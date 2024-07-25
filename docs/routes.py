@@ -5,7 +5,7 @@ from docs.models import User
 
 @app.route("/")
 def index_page():
-  return 
+  return render_template("base.html")
 
 @app.route("/register", methods = ["POST", "GET"])
 def register_page():
@@ -19,12 +19,16 @@ def register_page():
       db.session.commit()
       login_user(user_to_create)
 
+    print("yay")
     return redirect(url_for("dashboard_page"))
+  if form.errors != {}: #.errors Stores all the errors from the form (If there are no errors from the validations)
+      for err_msg in form.errors.values():
+        print(err_msg)
   
   return render_template("register.html", form = form)
 
 
-@app.route("/login")
+@app.route("/login", methods = ["POST", "GET"])
 def login_page():
   form = LoginForm()
   if form.validate_on_submit():
@@ -42,6 +46,6 @@ def login_page():
   return render_template("login.html", form = form)
 
 @login_required #Require login before the route is set up
-@app.route("/dashboard")
+@app.route("/dashboard", methods = ["POST", "GET"])
 def dashboard_page():
   return render_template("dashboard.html")
