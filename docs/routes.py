@@ -8,6 +8,11 @@ from docs.models import User
 def index_page():
   return render_template("base.html")
 
+@app.route("/products")
+def products_page():
+  return render_template("products.html")
+
+
 @app.route("/register", methods = ["POST", "GET"])
 def register_page():
   form = RegisterForm()
