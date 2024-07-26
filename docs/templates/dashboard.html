@@ -103,7 +103,6 @@ current_user.is_authenticated %}
         </tr>
         {% endfor %}
       </tbody>
-    </table>
 
     {% else %}
     <div class="mx-auto flex flex-col gap-2 justify-center items-center">
@@ -145,7 +144,9 @@ current_user.is_authenticated %}
         >View Available Insurance Plans</a
       >
     </div>
-    {% endif %} {% endif %} 
+    {% endif %} 
+  </table>
+  {% endif %} 
   </div>
 </div>
 {% endblock %}

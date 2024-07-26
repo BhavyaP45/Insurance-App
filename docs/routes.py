@@ -6,83 +6,109 @@ from flask import request
 from docs.models import Options, Purchases
 import requests, random
 
+#Initialize index route
 @app.route("/")
 def index_page():
+  #Show the number of cart items in nav if the user is authenticated
   if current_user.is_authenticated:
     cart_count = Cart.query.filter_by(owner = current_user.id).count()
   else:
     cart_count = 0
+  #Return index render template 
   return render_template("index.html", cart_count = cart_count)
 
+#Establish route for the sign-up/register page
 @app.route("/register", methods = ["POST", "GET"])
 def register_page():
+  #Use WTForms to create a register form
   form = RegisterForm()
+  #If the form is validated
   if form.validate_on_submit():
     #Create user and add entry to the database
     user_to_create = User(username = form.username.data, email_address = form.email_address.data, \
                           password = form.password.data, isAdmin = form.isAdminField.data)
+    #Create a new app context in order to add it to the db
     with app.app_context():
       db.session.add(user_to_create)
       db.session.commit()
       login_user(user_to_create)
     
+    #If the user is an admin send them straight to the admin
     if current_user.isAdmin:
       return redirect('/admin')
     
+    #Redirect to the dashboard page
     return redirect(url_for("dashboard_page"))
+  
+  #Use Flask Flash to send messages to the user if something goes wrong
   if form.errors != {}: #.errors Stores all the errors from the form (If there are no errors from the validations)
       for err_msg in form.errors.values():
         flash(f'There was an error with creating a user: {err_msg}', category = "error")
 
   return render_template("register.html", form = form)
 
-
+#Establish login route
 @app.route("/login", methods = ["POST", "GET"])
 def login_page():
+  #Use WTForms LoginForm class
   form = LoginForm()
+  #If it is validated
   if form.validate_on_submit():
     try: 
+      #Find the user that matches the typed-in username
       attempted_user = User.query.filter_by(username = form.username.data).first()
 
+      #If the password hash matches the attempted password hash
       if attempted_user and attempted_user.check_password_correction(form.password.data):
+        #Use flask login to login_user
         login_user(attempted_user)
+        #Flash Success Message
         flash(f'Welcome Back {attempted_user.username}', category="success")
+        #Redirect to admin panel if the user is an admin
         if current_user.isAdmin:
           return redirect("/admin")
         return redirect(url_for("dashboard_page"))
+      #Flash message if the username does not match the password
       else:
-        flash("User name and password are not matched!", category= "error")
+        flash("Username and password are not matched!", category= "error")
 
+    #Try and except to catch any unwanted errors
     except:
       flash("Something Went Wrong", category = "error")
 
   return render_template("login.html", form = form)
 
-@login_required #Execute before setting up the route 
+
+@login_required #Execute before setting up the route to logout the user
 @app.route('/logout', methods = ["POST","GET"])
 def logout_page():
     logout_user()
     flash("Success! Logged out!", category= "success")
+    #Redirect back to the index
     return redirect(url_for("index_page"))
 
-@login_required #Require login before the route is set up
+@login_required #Require login before the route to the dashboard is set up
 @app.route("/dashboard", methods = ["POST", "GET"])
 # Generating random messages for the dashboard.
 def dashboard_page(): 
+  #Create a list of messages for the user, select a random one
   list_of_messages = [
     "Insure your assets today.",
     "Protect you and your loved ones today.",
-    "Expect the unexpected with ICS-Insurance.",
+    "Expect the unexpected with ICS Insurance.",
     "Be prepared for anything that comes your way.",
     "Remain adaptable.",
   ]
   display_message = random.choice(list_of_messages)
-  
+  #If the user is not authenticated redirect it to the login page
   if not current_user.is_authenticated:
     return redirect(url_for("login_page"))
+  
+  #Query all the purchases by the owner, by their different statuses
   approved = Purchases.query.filter_by(owner = current_user.id, status = "APPROVED").all()
   pending = Purchases.query.filter_by(owner = current_user.id, status = "PENDING").all()
   declined = Purchases.query.filter_by(owner = current_user.id, status = "DECLINED").all()
+  #Number of items in the cart
   cart_count = Cart.query.filter_by(owner = current_user.id).count()
 
   # calculate monthly total with 13% tax applied
@@ -133,7 +159,6 @@ def dashboard_page():
 
   return render_template("dashboard.html", cart_count = cart_count,approved_types=approved_types, discount=discount, user = current_user, approved = approved, pending = pending, declined = declined, monthly_total = monthly_total, yearly_total = yearly_total, display_message = display_message)
 
-@login_required
 @app.route("/products", methods = ["POST", "GET"])
 def products_page():
   # redirect to log in if user is not logged in

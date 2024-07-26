@@ -37,8 +37,7 @@ current_user.is_authenticated %}
         </tr>
         {% endfor %}
       </tbody>
-    </table>
-    <div class="flex justify-end gap-4">
+    <div class="flex justify-end gap-4 my-3">
       <a href="/products" class="btn btn-secondary">Add More</a>
       <form method="POST">
         <button type="submit" class="btn btn-secondary">Checkout</button>
@@ -54,6 +53,7 @@ current_user.is_authenticated %}
     </div>
 
     {% endif %}
+  </table>
 
     {% if approved_types != 0 and discount != 0 %}
     <div

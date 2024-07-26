@@ -61,10 +61,10 @@ class PurchaseModelView(ModelView):
 
 class OptionsModelView(ModelView):
   can_edit = True
-  column_searchable_list = ['type', 'title']
-  column_filters = ['type']
-  column_exclude_list = ['id']
-  # form_excluded_columns = ['colour']
+  column_searchable_list = ['type', 'title', 'tier']
+  column_filters = ['type', 'tier']
+  column_exclude_list = ['id', 'colour']
+  form_excluded_columns = ['colour']
 
   def is_accessible(self):
     if current_user.is_authenticated: 
