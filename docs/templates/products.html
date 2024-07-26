@@ -2,52 +2,53 @@
 %} {% block body %}
 
 <div>
+  {% if current_user.is_authenticated %}
   <h1 class="text-2xl font-bold my-4 mx-20">Add a New Product</h1>
+  {% else %}
+  <h1 class="text-2xl font-bold my-4 mx-20">View All our Options</h1>
+  {% endif %}
   <div class="grid sm:grid-cols-12 gap-4 md:mx-20 mx-10">
-  </div>
-    <div class="filters grid sm:grid-cols-12 row-span-1 sm:col-span-9 text-center bg-white">
-      <div class="md:col-span-3 row-span-1 text-center rounded-lg">
-        <div
-          class="m-4 p-4 rounded-lg shadow-lg min-h-[100px] bg-white border border-2 border-gray-500"
-        >
-          <h1 class="pb-2 text-lg font-bold">Filter</h1>
-          <h2 class="text-lg italic">Type of Coverage</h2>
-          <div class="filterbtns types">
-            <button
-              class="filterbtn block mx-auto m-2 btn btn-xs md:btn-sm btn-outline btn-accent" id="ALL"
-            >
-              ALL
-            </button>
-            <button
-              class="filterbtn block mx-auto m-2 btn btn-xs md:btn-sm btn-outline text-red-500" id="LIFE"
-            >
-              Life
-            </button>
-            <button
-              class="filterbtn block mx-auto m-2 btn btn-xs md:btn-sm btn-outline text-orange-500" id="HOME"
-            >
-              Home
-            </button>
-            <button
-              class="filterbtn block mx-auto m-2 btn btn-xs md:btn-sm btn-outline text-yellow-500" id="HEALTH"
-            >
-              Health
-            </button>
-            <button
-              class="filterbtn block mx-auto m-2 btn btn-xs md:btn-sm btn-outline text-green-500" id="TRAVEL"
-            >
-              Travel
-            </button>
-            <button
-              class="filterbtn block mx-auto m-2 btn btn-xs md:btn-sm btn-outline text-blue-500" id="AUTO"
-            >
-              Auto
-            </button>
-          </div>
+    <div class="md:col-span-3 row-span-2 text-center rounded-lg">
+      <div class="m-4 p-4 rounded-lg shadow-lg min-h-[100px] bg-white border border-2 border-gray-500">
+        <h1 class="pb-2 text-lg font-bold">Filter</h1>
+        <h2 class="text-lg italic">Type of Coverage</h2>
+        <div class="filterbtns types">
+          <button
+            class="filterbtn block mx-auto m-2 btn btn-xs md:btn-sm btn-outline btn-accent" id="ALL"
+          >
+            ALL
+          </button>
+          <button
+            class="filterbtn block mx-auto m-2 btn btn-xs md:btn-sm btn-outline text-red-500" id="LIFE"
+          >
+            Life
+          </button>
+          <button
+            class="filterbtn block mx-auto m-2 btn btn-xs md:btn-sm btn-outline text-orange-500" id="HOME"
+          >
+            Home
+          </button>
+          <button
+            class="filterbtn block mx-auto m-2 btn btn-xs md:btn-sm btn-outline text-yellow-500" id="HEALTH"
+          >
+            Health
+          </button>
+          <button
+            class="filterbtn block mx-auto m-2 btn btn-xs md:btn-sm btn-outline text-green-500" id="TRAVEL"
+          >
+            Travel
+          </button>
+          <button
+            class="filterbtn block mx-auto m-2 btn btn-xs md:btn-sm btn-outline text-blue-500" id="AUTO"
+          >
+            Auto
+          </button>
         </div>
       </div>
+    </div>
+    <div class="filters grid sm:grid-cols-12 row-span-1 sm:col-span-9 text-center bg-white h-screen overflow-y-scroll">
       {% for option in options %}
-      <div class="card filter ALL {{option.type}} {{option.tier}} shadow-xl md:col-span-3 sm:col-span-6 m-2 border-t-8 border-{{option.colour}}-500 ">
+      <div class="card filter ALL {{option.type}} {{option.tier}} shadow-xl h-fit md:col-span-4 sm:col-span-6 m-2 border-t-8 border-{{option.colour}}-500 ">
         <div class="card-body">
           <h2 class="card-title text-{{option.colour}}">{{option.title}}</h2>
           <p>{{ option.mini_description }}
@@ -96,116 +97,7 @@
         <a
           href="/cart?product_id={{option.id}}"
           class="btn btn-sm bg-{{option.colour}}-500 text-white w-3/4 mx-auto border border-{{option.colour}}-500 mb-2 hover:btn-outline hover:text-{{option.colour}}-500"
-          >Add to Cart</a
-        >
-      </div>
-      {% endfor %}
-      {% for option in options %}
-      <div class="card filter ALL {{option.type}} {{option.tier}} shadow-xl md:col-span-3 sm:col-span-6 m-2 border-t-8 border-{{option.colour}}-500 ">
-        <div class="card-body">
-          <h2 class="card-title text-{{option.colour}}">{{option.title}}</h2>
-          <p>{{ option.mini_description }}
-            <label
-            for="my_modal_6"
-            class="btn btn-xs bg-{{option.colour}}-500 text-white">See More</label>
-          </p>
-          <!-- The button to open modal -->
-
-          <!-- Put this part before </body> tag -->
-          <input
-            type="checkbox"
-            id="my_modal_6"
-            class="modal-toggle text-center"
-          />
-          <div class="modal" role="dialog">
-            <div class="modal-box bg-white">
-              <h3 class="text-lg font-bold">{{option.title}}</h3>
-              <p class="py-4">{{option.description}}</p>
-              <div class="modal-action">
-                <label
-                  for="my_modal_6"
-                  class="btn btn-sm bg-{{option.colour}}-500 text-white"
-                  >Close!</label
-                >
-              </div>
-            </div>
-          </div>
-          <ul class="">
-            
-            <li>- Monthly Price: <span class="text-{{option.colour}}-500">${{option.month_price}}</span></li>
-            <li>- Yearly Price: <span class="text-{{option.colour}}-500">${{option.yearly_price}}</span></li>
-          </ul>
-
-          <div class="card-actions justify-end">
-            <div class="badge badge-outline text-{{option.colour}}-500">{{ option.type }}</div>
-            {% if option.tier == 'Basic' %}
-            <div class="badge badge-outline text-teal-500">{{option.tier}}</div>
-            {% elif option.tier == 'Enhanced'%}
-            <div class="badge badge-outline text-purple-500">{{option.tier}}</div>
-            {% else %}
-            <div class="badge badge-outline text-pink-500">{{option.tier}}</div>
-            {% endif %}
-          </div>
-        </div>
-        <a
-          href="/cart?product_id={{option.id}}"
-          class="btn btn-sm bg-{{option.colour}}-500 text-white w-3/4 mx-auto border border-{{option.colour}}-500 mb-2 hover:btn-outline hover:text-{{option.colour}}-500"
-          >Add to Cart</a
-        >
-      </div>
-      {% endfor %}
-      {% for option in options %}
-      <div class="card filter ALL {{option.type}} {{option.tier}} shadow-xl md:col-span-3 sm:col-span-6 m-2 border-t-8 border-{{option.colour}}-500 ">
-        <div class="card-body">
-          <h2 class="card-title text-{{option.colour}}">{{option.title}}</h2>
-          <p>{{ option.mini_description }}
-            <label
-            for="my_modal_6"
-            class="btn btn-xs bg-{{option.colour}}-500 text-white">See More</label>
-          </p>
-          <!-- The button to open modal -->
-
-          <!-- Put this part before </body> tag -->
-          <input
-            type="checkbox"
-            id="my_modal_6"
-            class="modal-toggle text-center"
-          />
-          <div class="modal" role="dialog">
-            <div class="modal-box bg-white">
-              <h3 class="text-lg font-bold">{{option.title}}</h3>
-              <p class="py-4">{{option.description}}</p>
-              <div class="modal-action">
-                <label
-                  for="my_modal_6"
-                  class="btn btn-sm bg-{{option.colour}}-500 text-white"
-                  >Close!</label
-                >
-              </div>
-            </div>
-          </div>
-          <ul class="">
-            
-            <li>- Monthly Price: <span class="text-{{option.colour}}-500">${{option.month_price}}</span></li>
-            <li>- Yearly Price: <span class="text-{{option.colour}}-500">${{option.yearly_price}}</span></li>
-          </ul>
-
-          <div class="card-actions justify-end">
-            <div class="badge badge-outline text-{{option.colour}}-500">{{ option.type }}</div>
-            {% if option.tier == 'Basic' %}
-            <div class="badge badge-outline text-teal-500">{{option.tier}}</div>
-            {% elif option.tier == 'Enhanced'%}
-            <div class="badge badge-outline text-purple-500">{{option.tier}}</div>
-            {% else %}
-            <div class="badge badge-outline text-pink-500">{{option.tier}}</div>
-            {% endif %}
-          </div>
-        </div>
-        <a
-          href="/cart?product_id={{option.id}}"
-          class="btn btn-sm bg-{{option.colour}}-500 text-white w-3/4 mx-auto border border-{{option.colour}}-500 mb-2 hover:btn-outline hover:text-{{option.colour}}-500"
-          >Add to Cart</a
-        >
+          >Add to Cart</a>
       </div>
       {% endfor %}
 
