@@ -89,9 +89,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbar">
         <div class="navbar-nav flex-grow-1 ms-10 me-10">
-          <a class="nav-item nav-link font-bold text-white mx-2">ICS Insurance</a>
+          <a class="nav-item nav-link font-bold text-white mx-2"
+            >ICS Insurance</a
+          >
           <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="products" href="/products">Products</a>
+          <a class="nav-item nav-link" id="products" href="/products"
+            >Products</a
+          >
           {% if current_user.is_authenticated %}
           <a class="nav-item nav-link" id="dashboard" href="/dashboard"
             >Dashboard</a
@@ -162,4 +166,9 @@
 
     {% block body %}{% endblock %}
   </body>
+  <footer class="footer footer-center bg-base-300 text-base-content p-4 md:p-6 lg:p-8">
+    <aside>
+      <p>Copyright © 2024 - All rights reserved by ICS Insurance LTD.</p>
+    </aside>
+  </footer>
 </html>

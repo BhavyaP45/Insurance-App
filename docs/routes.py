@@ -67,7 +67,8 @@ def logout_page():
 
 @login_required #Require login before the route is set up
 @app.route("/dashboard", methods = ["POST", "GET"])
-def dashboard_page():
+# Generating random messages for the dashboard.
+def dashboard_page(): 
   list_of_messages = [
     "Insure your assets today.",
     "Protect you and your loved ones today.",
@@ -96,6 +97,7 @@ def dashboard_page():
   yearly_total = 0
   for item in approved:
     yearly_total += item.yearly_price
+  yearly_total = yearly_total * 1.13
   yearly_total = round(yearly_total, 2)
 
   # if approved.length is 2, discount = 10%. If approved.length is > 2, discount = 20% on the total yearly and monthly prices
@@ -103,14 +105,20 @@ def dashboard_page():
   if len(approved) == 2:
     yearly_total = yearly_total * 0.9
     monthly_total = monthly_total * 0.9
+    monthly_total = round(monthly_total, 2)
+    yearly_total = round(yearly_total, 2)
     discount = 10
   elif len(approved) > 2:
     yearly_total = yearly_total * 0.8
     monthly_total = monthly_total * 0.8
+    monthly_total = round(monthly_total, 2)
+    yearly_total = round(yearly_total, 2)
     discount = 20
   else:
     yearly_total = yearly_total
     monthly_total = monthly_total
+    monthly_total = round(monthly_total, 2)
+    yearly_total = round(yearly_total, 2)
     discount = 0
   # Create a string with all the types of all approved items
   approved_types = ""
@@ -230,6 +238,8 @@ def checkout_page():
   yearly_total = 0
   for item in cart_items:
     yearly_total += item.yearly_price
+  yearly_total = yearly_total * 1.13
+  # round yearly_total to 2 decimal places
   yearly_total = round(yearly_total, 2)
 
   # if approved.length is 2, discount = 10%. If approved.length is > 2, discount = 20% on the total yearly and monthly prices
@@ -237,14 +247,20 @@ def checkout_page():
   if len(cart_items) == 2:
     yearly_total = yearly_total * 0.9
     monthly_total = monthly_total * 0.9
+    yearly_total = round(yearly_total, 2)
+    monthly_total = round(monthly_total, 2)
     discount = 10
   elif len(cart_items) > 2:
     yearly_total = yearly_total * 0.8
+    yearly_total = round(yearly_total, 2)
     monthly_total = monthly_total * 0.8
+    monthly_total = round(monthly_total, 2)
     discount = 20
   else:
     yearly_total = yearly_total
+    yearly_total = round(yearly_total, 2)
     monthly_total = monthly_total
+    monthly_total = round(monthly_total, 2)
     discount = 0
   # Create a string with all the types of all approved items
   approved_types = ""
@@ -282,7 +298,7 @@ def delete_cart_item():
 def remove_insurance_option():
   if not current_user.is_authenticated:
     return redirect(url_for("login_page"))
-  purchased_item_id = request.args.get("approved_item")
+  purchased_item_id = request.args.get("item_id")
   purchased_item = Purchases.query.filter_by(id=purchased_item_id).first()
   request_user = User.query.filter_by(id = purchased_item.owner).first()
   user_email = request_user.email_address
@@ -291,7 +307,7 @@ def remove_insurance_option():
   if purchased_item:
     url = "https://mail-sender-api1.p.rapidapi.com/"
     payload = {
-      "sendto": user_email,
+      "sendto": admin_email,
       "name": "ICS Insurance Customer Service",
       "replyTo": admin_email,
       "ishtml": "true",
@@ -299,12 +315,12 @@ def remove_insurance_option():
       "body": f"<a href=\"http://127.0.0.1:5000/admin/purchases/edit/?id={purchased_item_id}&url=/admin/purchases/\" target='_blank'>Visit Admin Panel</a>"
     }
     headers = {
-      "x-rapidapi-key": "e471e106ccmsh4d5ee552c2e36b1p15ebd3jsn0a8d2a243a8e",
+      "x-rapidapi-key": "110ab4fdfemsh81953e4f0a53476p1970f4jsn593bfac55618",
       "x-rapidapi-host": "mail-sender-api1.p.rapidapi.com",
       "Content-Type": "application/json"
     }
     response = requests.post(url, json=payload, headers=headers)
     print(response.json())
-    flash(f"Request to remove {purchased_item.title} has been sent to the user!", category="success")
+    flash(f"Request to remove {purchased_item.title} has been sent to the admin!", category="success")
     return redirect(url_for("dashboard_page"))
 

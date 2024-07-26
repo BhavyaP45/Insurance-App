@@ -50,7 +50,7 @@ class PurchaseModelView(ModelView):
     column_searchable_list = ['type', 'title']
     column_exclude_list = ['id']
     column_filters = ['purchased_date', 'type']
-    form_excluded_columns = ['title', 'type', 'price', 'purchased_date', 'owner', 'yearly_price', 'monthly_price']
+    form_excluded_columns = ['title', 'type', 'price', 'purchased_date', 'owner', 'yearly_price', 'month_price']
     
     
     def is_accessible(self):

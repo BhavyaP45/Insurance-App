@@ -1,3 +1,4 @@
+# Import modules needed.
 from docs import app, db
 from os import path
 

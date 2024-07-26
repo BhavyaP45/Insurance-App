@@ -1,7 +1,7 @@
 {% extends "base.html" %} {%block head%} {%endblock %} {% block body %} {% if
 current_user.is_authenticated %}
 
-<h1 class="text-2xl font-bold my-4 mx-20">Checkout</h1>
+<h1 class="h1 text-center my-4 font-bold">CHECKOUT</h1>
 <div class="w-5/6 mx-auto px-4">
   <div class="overflow-x-auto">
     <table class="table">
@@ -39,33 +39,42 @@ current_user.is_authenticated %}
       </tbody>
     </table>
     <div class="flex justify-end gap-4">
-      <a href="/products" class="btn btn-primary">Add More</a>
+      <a href="/products" class="btn btn-secondary">Add More</a>
       <form method="POST">
-        <button type="submit" class="btn btn-primary">Checkout</button>
+        <button type="submit" class="btn btn-secondary">Checkout</button>
       </form>
     </div>
     {% else %}
     <div class="mx-auto flex flex-col gap-2 justify-center items-center">
       <h1 class="h3 text-center">
-        You have no items in your cart. Please visit our product page
-        to select any options
+        You have no items in your cart. Please visit our product page to select
+        any options
       </h1>
       <a href="/products" class="btn btn-md mx-auto">Products</a>
     </div>
 
     {% endif %}
 
-
-    <div class="p-2 m-4 w-3/4 mx-auto border">
+    <div
+      class="p-2 m-4 w-3/4 mx-auto border font-bold text-center border rounded-lg shadow"
+    >
       {% if approved_types != 0 and discount != 0 %}
-      
-      <p class="text-lg">Your Current Bundle: <span class="text-green-500">{{ approved_types }}</span></p>
-      <p class="text-lg">Bundle Discount: <span class="text-green-500">{{ discount }}%</span></p>
+      <div class="divider divider-secondary">Insurance Details</div>
+      <p class="text-lg">
+        Your Current Bundle:
+        <span class="text-green-500">{{ approved_types }}</span>
+      </p>
+      <p class="text-lg">
+        Bundle Discount: <span class="text-green-500">{{ discount }}%</span>
+      </p>
+      <div class="divider divider-secondary">Insurance Payments</div>
       {% else %} {% endif %}
-      <p class="text-lg">Monthly Total (with tax): ${{ monthly_total }}</p>
-      <p class="text-lg">Yearly Total (with tax): ${{ yearly_total }}</p>
+      <div class="w-3/4 mx-auto">
+        <p class="text-lg">Monthly Total (with tax): ${{ monthly_total }}</p>
+        <p class="text-lg">Yearly Total (with tax): ${{ yearly_total }}</p>
+      </div>
       {% endif %}
     </div>
+    {% endblock %}
   </div>
-  {% endblock %}
 </div>

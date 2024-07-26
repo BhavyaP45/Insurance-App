@@ -1,31 +1,35 @@
 {% extends "base.html" %} {%block head%} {%endblock %} {% block body %} {% if
 current_user.is_authenticated %}
 
-
-
 <div class="hero bg-base-200 min-h-[250px]">
   <div class="hero-content text-center">
     <div class="max-w-md">
-      <h1 style="color: rgb(73, 123, 215);" class="text-5xl font-bold">Welcome, {{ current_user.username }}</h1>
-      <p class="py-6">
-        {{ display_message }}
-      </p>
+      <h1 style="color: rgb(73, 123, 215)" class="text-5xl font-bold">
+        Welcome, {{ current_user.username }}
+      </h1>
+      <p class="py-6">{{ display_message }}</p>
     </div>
   </div>
 </div>
 
-<div class="totals text-lg mx-auto flex flex-col gap-y-3 text-center my-2 font-bold">
-{% if approved_types != 0 and discount != 0 and approved %}
-<p>Your Current Bundle: {{ approved_types }}</p>
-<p>Bundle Discount: {{ discount }}%</p>
-{% endif %}
-{% if approved or declined or pending %}
-<div class="text-lg my-2 flex-row flex justify-center gap-x-5 rounded-md border border-2 border-pink-600 w-fit mx-auto px-4">
-  <p>Monthly Total (with tax): ${{ monthly_total }}</p>
-  <p>Yearly Total (with tax): ${{ yearly_total }}</p>
-</div>
+<div
+  class="totals text-lg mx-auto flex flex-col gap-y-3 text-center my-2 font-bold border border-2 border-pink-600"
+>
+  {% if approved_types != 0 and discount != 0 and approved %}
+  <p>Your Current Bundle: {{ approved_types }}</p>
+  <p>Bundle Discount: {{ discount }}%</p>
+  {% endif %} {% if approved or declined or pending %} {% if pending and not
+  approved and not declined%}
+  <p class="text-lg my-1">Your current requests are still pending</p>
+  {% endif %}
+  <div
+    class="text-lg my-2 flex-row flex justify-center gap-x-5 rounded-md border border-2 w-fit mx-auto px-4 border-pink-600"
+  >
+    <p>Monthly Total (with tax): ${{ monthly_total }}</p>
+    <p>Yearly Total (with tax): ${{ yearly_total }}</p>
+  </div>
 
-{% endif %}
+  {% endif %}
 </div>
 
 <div class="w-5/6 mx-auto px-4 py-12">
@@ -55,7 +59,7 @@ current_user.is_authenticated %}
           <td>{{approved_item.status}}</td>
           <td>
             <a
-              href="/removeoption?approved_item={{approved_item.id}}"
+              href="/removeoption?item_id={{approved_item.id}}"
               class="btn btn-sm bg-blue-500 text-white"
             >
               Request Removal
@@ -71,7 +75,7 @@ current_user.is_authenticated %}
           <td>{{pending_item.status}}</td>
           <td>
             <a
-              href="/removeoption?pending_item={{pending_item.id}}"
+              href="/removeoption?item_id={{pending_item.id}}"
               class="btn btn-sm bg-blue-500 text-white"
             >
               Request Removal
@@ -87,7 +91,7 @@ current_user.is_authenticated %}
           <td>{{declined_item.status}}</td>
           <td>
             <a
-              href="/removeoption?declined_item={{declined_item.id}}"
+              href="/removeoption?item_id={{declined_item.id}}"
               class="btn btn-sm bg-blue-500 text-white"
             >
               Request Removal
@@ -100,18 +104,44 @@ current_user.is_authenticated %}
 
     {% else %}
     <div class="mx-auto flex flex-col gap-2 justify-center items-center">
-      <h1 class="h3 text-center">
-        You have no outgoing insurance requests. Please visit our product page
-        to select any options
-      </h1>
-      <a href="/products" class="btn btn-md mx-auto">Products</a>
+      <h4 class="h4 text-center">
+        You have no current insurance plans. <br></br> Please visit our product page
+        to select any plans.
+      </h4>
+      <div class="flex flex-row rounded-lg w-3/4 mx-auto m-4">
+        <div
+          class="border-teal-100 border-t-8 border-b-8 rounded-lg w-1/3 mx-4"
+        >
+          <h1 class="text-center text-2xl font-bold">No Bundle?</h1>
+          <p class="text-center p-2">
+            Want only 1 coverage? No problem! Pick an insurance coverage today
+            with no discount.
+          </p>
+        </div>
+        <div
+          class="border-purple-100 border-t-8 border-b-8 rounded-lg w-1/3 mx-4"
+        >
+          <h1 class="text-center text-2xl font-bold">2 Item Bundle</h1>
+          <p class="text-center p-2">
+            With 2 insurance coverages bundled together, you can save 10% off
+            your final price!
+          </p>
+        </div>
+        <div
+          class="border-pink-100 border-t-8 border-b-8 rounded-lg w-1/3 mx-4"
+        >
+          <h1 class="text-center text-2xl font-bold">2+ Item Bundle</h1>
+          <p class="text-center p-2">
+            If you buy 3 or more insurance coverages, you can save a maximum of
+            20% off your final price!
+          </p>
+        </div>
+      </div>
+
+      <a href="/products" class="btn btn-lg btn-secondary mx-auto my-4"
+        >View Available Insurance Plans</a
+      >
     </div>
-    {% endif %}
-
-    <!-- if discount is not 0, show discount -->
-
-    <!-- Show bundle -->
-
- {% endif %} {% endblock %}
+    {% endif %} {% endif %} {% endblock %}
   </div>
 </div>
