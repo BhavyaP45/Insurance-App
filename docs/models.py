@@ -1,18 +1,19 @@
 from docs import app, db, UserMixin, bcrypt, loginmanager, admin
+from sqlalchemy.sql import func
 
 
 @loginmanager.user_loader #Required property for the users to be authenticated
 def load_user(user_id):
     return User.query.get(user_id)
 
-#Create class user with Database Model, create various columns
+#Create class user with Database Model, create various columns for the table
 class User(db.Model, UserMixin): #Use UserMixin class to add prexisting methods
     id = db.Column(db.Integer(), primary_key = True)
     username = db.Column(db.String(length = 45), nullable = False, unique = True)
     email_address = db.Column(db.String(), unique = True, nullable = False)
     password_hash = db.Column(db.String(), nullable = False)
     isAdmin = db.Column(db.Boolean())
-    insuranceSelection = db.relationship('Insurance', backref = "insurance_selection", lazy = True)
+    insuranceSelection = db.relationship('Purchases', backref = "insurance_selection", lazy = True)
     
     #Create a password property
     @property
@@ -27,9 +28,18 @@ class User(db.Model, UserMixin): #Use UserMixin class to add prexisting methods
     def check_password_correction(self, attempted_password):
       return bcrypt.check_password_hash(self.password_hash, attempted_password) #checks the hash password with the attempted one
     
-class Insurance(db.Model):
-   id = db.Column(db.Integer(), primary_key = True)
-   title =  db.Column(db.String(length = 45), nullable = False)
-   owner = db.Column(db.Integer(), db.ForeignKey("user.id")) 
+class Purchases(db.Model):
+  id = db.Column(db.Integer(), primary_key = True)
+  title =  db.Column(db.String(length = 45), nullable = False)
+  type =  db.Column(db.String(length = 45), nullable = False)
+  purchased_date = db.Column(db.DateTime(timezone=True), default=func.now())
+  price = db.Column(db.Integer(), nullable = False)
+  owner = db.Column(db.Integer(), db.ForeignKey("user.id")) 
+  status = db.Column(db.String(length = 45), nullable = False)
    
-  
+class Options(db.Model):
+  id = db.Column(db.Integer(), primary_key = True)
+  title =  db.Column(db.String(length = 45), nullable = False)
+  type =  db.Column(db.String(length = 45), nullable = False)
+  price = db.Column(db.Integer(), nullable = False)
+  description = db.Column(db.String(length = 100), nullable = False)

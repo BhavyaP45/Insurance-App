@@ -30,18 +30,37 @@ loginmanager.login_view = "login_page" #When unauthorized user tries clicking th
 
 #Obtain routes from routes.py in the docs module
 from docs import routes
-from docs.models import User
+from docs.models import User, Purchases
 
 class AdminModelView(ModelView):
   can_edit = False
   column_exclude_list = ['password_hash', 'id']
 
   def is_accessible(self):
-    x = current_user.is_authenticated and current_user.isAdmin == True
-    return x
+    if current_user.is_authenticated: 
+        return current_user.isAdmin
+          
   
   def inaccessible_callback(self, name, **kwargs):
     # redirect to login page if user doesn't have access
       return redirect(url_for('login_page'))
    
-admin.add_view(AdminModelView(User, db.session, ))
+class PurchaseModelView(ModelView):
+    """
+    can_delete = True
+    column_searchable_list = ['type', 'title']
+    # column_exclude_list = ['id']
+    column_filters = ['purchased_date', 'type']
+    form_excluded_columns = ['title', 'type', 'price', 'purchased_date', 'owner']
+    """
+    
+    def is_accessible(self):
+      if current_user.is_authenticated: 
+          return current_user.isAdmin
+      
+    def inaccessible_callback(self, name, **kwargs):
+    # redirect to login page if user doesn't have access
+      return redirect(url_for('login_page'))
+    
+admin.add_view(AdminModelView(User, db.session ))
+admin.add_view(PurchaseModelView(Purchases, db.session ))
