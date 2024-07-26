@@ -1,20 +1,6 @@
 {% extends "base.html" %} {% block title %}ICS Insurance{% endblock %} {% block
 body %}
 
-<dialog id="my_modal_3" class="modal">
-  <div class="modal-box">
-    <form method="dialog">
-      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
-        ✕
-      </button>
-    </form>
-    <h3 class="text-lg font-bold">Hello!</h3>
-    <p class="py-4">
-      We have added a theme selector to our website! Check it out!
-    </p>
-  </div>
-</dialog>
-
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 
@@ -255,7 +241,7 @@ body %}
 <div
   class="hero min-h-screen"
   style="
-    background-image: url('https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg?cs=srgb&dl=pexels-joyston-judah-331625-933054.jpg&fm=jpg');
+    background-image: url('https://images.pexels.com/photos/3933989/pexels-photo-3933989.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2');
     background-position: 0% 20%;
   "
 >
@@ -294,18 +280,21 @@ body %}
   <h3 class="lifetimestats font-bold mb-4">Lifetime Stats</h3>
 </div>
 <div class="flex justify-center mt-10">
-  <div style="color: rgb(98, 124, 206);" class="stats stats-vertical lg:stats-horizontal shadow">
+  <div
+    style="color: rgb(98, 124, 206)"
+    class="stats stats-vertical lg:stats-horizontal shadow"
+  >
     <div class="stat">
       <div class="stat-title">Registered Clients</div>
       <div class="stat-value">1.1M</div>
     </div>
 
-    <div style="color: #9a5dc9;" class="stat">
+    <div style="color: #9a5dc9" class="stat">
       <div class="stat-title">Satisfaction Rate</div>
       <div class="stat-value">98%</div>
     </div>
 
-    <div style="color: #58b75b;" class="stat">
+    <div style="color: #58b75b" class="stat">
       <div class="stat-title">Money Saved</div>
       <div class="stat-value">$2.3B</div>
     </div>
@@ -319,7 +308,7 @@ body %}
 </div>
 
 <div class="endorsements">
-  <h3 class="endorsemessage font-bold mb-4">Endorsed by</h3>
+  <h3 class="endorsemessage font-bold">Endorsed by</h3>
   <div class="images">
     <img
       src="https://rolandcorp.com.au/blog/wp-content/uploads/2023/10/forbes-logo-transparent-free-png.webp"
@@ -342,6 +331,23 @@ body %}
       src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/FORTUNE-LOGO-2016.png/1200px-FORTUNE-LOGO-2016.png"
     />
   </div>
+</div>
+
+<div class="container mx-auto px-4 py-2 pb-8 my-4 flex flex-col items-center">
+  <div class="p-4 text-center font-semibold gap-2">
+    <h1 class="endorsemessage">
+      Have questions about selecting an insurance plan?
+    </h1>
+    <h3 class="text-xl font-bold text-slate-700 py-4">
+      Ask Daniel, ICS Insurance's AI Chatbot Agent!
+    </h3>
+  </div>
+  <iframe
+    src="https://ics-agent.streamlit.app/?embed=true&embed_options=show_toolbar,show_colored_line"
+    class="w-3/4 border-0"
+    height="500"
+  >
+  </iframe>
 </div>
 
 <div class="getstarted">

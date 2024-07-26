@@ -60,8 +60,8 @@
 
         // daisyUI config (optional - here are the default values)
         daisyui: {
-          themes: ["cupcake", "light", "cmyk"],
-          darkTheme: "cupcake", // name of one of the included themes for dark mode
+          themes: ["cupcake", "light", "cmyk", "nord"],
+          darkTheme: "nord", // name of one of the included themes for dark mode
           base: true, // applies background color and foreground color for root element by default
           styled: true, // include daisyUI colors and design decisions for all components
           utils: true, // adds responsive and modifier utility classes
@@ -88,15 +88,15 @@
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbar">
-        <div class="navbar-nav flex-grow-1">
+        <div class="navbar-nav flex-grow-1 ms-10 me-10">
+          <a class="nav-item nav-link font-bold text-white mx-2">ICS Insurance</a>
           <a class="nav-item nav-link" id="home" href="/">Home</a>
+          <a class="nav-item nav-link" id="products" href="/products">Products</a>
           {% if current_user.is_authenticated %}
           <a class="nav-item nav-link" id="dashboard" href="/dashboard"
             >Dashboard</a
           >
-          <a class="nav-item nav-link" id="products" href="/products"
-            >Products</a
-          >
+
           <a class="nav-item nav-link" id="checkout" href="/checkout"
             >Checkout</a
           >

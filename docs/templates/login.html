@@ -1,11 +1,5 @@
 {% extends "base.html" %} {% block head %} {% endblock %} {% block body %}
 
-<!--
-  Heads up! 👋
-
-  Plugins:
-    - @tailwindcss/forms
--->
 <form method="POST">
   {{ form.hidden_tag()}}
   <!--Prevents Cross Site Request Forgery -->
@@ -22,6 +16,7 @@
 
       <form action="#" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
         <div>
+          <div class="my-8"></div>
           <label for="email" class="sr-only">Username</label>
 
           <div class="relative my-2">
@@ -77,7 +72,7 @@
     <div class="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
       <img
         alt=""
-        src="https://images.unsplash.com/photo-1630450202872-e0829c9d6172?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80"
+        src="https://deeplor.s3.us-west-2.amazonaws.com/matting_original/2024/07/26/5ca3ba7b840545259c05fc825838e80f.jpg?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Date=20240726T192054Z&X-Amz-SignedHeaders=host&X-Amz-Expires=10800&X-Amz-Credential=AKIAROYXHKZUSZONTWIG%2F20240726%2Fus-west-2%2Fs3%2Faws4_request&X-Amz-Signature=7bbee182206a28e2c95ecb102c7b7f71ff3cf8291dec95304393e1a745af5b50"
         class="absolute inset-0 h-full w-full object-cover"
       />
     </div>

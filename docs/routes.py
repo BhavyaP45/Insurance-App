@@ -120,23 +120,17 @@ def dashboard_page():
 @app.route("/products", methods = ["POST", "GET"])
 def products_page():
   # redirect to log in if user is not logged in
+  options = Options.query.all()
   if not current_user.is_authenticated:
-    return redirect(url_for("login_page"))
+    return render_template("products.html", cart_count = None, current_user = None, options = options)
   if request.method == "POST":
     return render_template("products.html", current_user=current_user)
 
-  elif request.method == "GET":
-    options = Options.query.all()
-    for option in options:
-      print(option.title)
-
-  cart_items = Cart.query.filter_by(owner = current_user.id).all()
   cart_count = Cart.query.filter_by(owner = current_user.id).count()
   # for cart_item in cart_items:
   #   print("CART ITEM: ", cart_item.title)
 
   options = Options.query.all()
-  cart = Cart.query.all()
   return render_template("products.html", cart_count = cart_count, current_user=current_user, options=options)
 
 @login_required

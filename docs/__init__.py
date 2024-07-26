@@ -66,7 +66,7 @@ class OptionsModelView(ModelView):
   column_searchable_list = ['type', 'title']
   column_filters = ['type']
   column_exclude_list = ['id', 'colour']
-  form_excluded_columns = ['colour']
+  # form_excluded_columns = ['colour']
 
   def is_accessible(self):
     if current_user.is_authenticated: 
