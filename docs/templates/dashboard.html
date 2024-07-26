@@ -1,67 +1,93 @@
 {% extends "base.html" %} {%block head%} {%endblock %} {% block body %} {% if
 current_user.is_authenticated %}
-<p>Welcome back, {{ current_user.username }}!</p>
-<button>
-  <a href="/products">Products</a>
-</button>
-
-<ul class="list-group list-group-flush" id="notes">
-  {% for purchase in user.purchases %}
-  <li class="list-group-item">{{ purchase.title }}</li>
-  {% endfor %}
-</ul>
-
-<h1>Approved</h1>
-<div class="w-5/6 mx-auto px-4">
+<div>
+{% if approved_types != 0 and discount != 0 and approved %}
+<p>Your Current Bundle: {{ approved_types }}</p>
+<p>Bundle Discount: {{ discount }}%</p>
+<p>Monthly Total (with tax): ${{ monthly_total }}</p>
+<p>Yearly Total (with tax): ${{ yearly_total }}</p>
+{% endif %}
+</div>
+<div class="w-5/6 mx-auto px-4 py-12">
   <div class="overflow-x-auto font-bold">
     <table class="table">
       <!-- head -->
+      {% if approved or pending or declined %}
       <thead>
         <tr>
-          <th>#</th>
           <th>Title</th>
           <th>Yearly Price</th>
           <th>Monthly Price</th>
           <th>Date Requested</th>
+          <th></th>
         </tr>
       </thead>
+
       <tbody>
         <!-- row template -->
         {% for approved_item in approved %}
         <tr class="bg-base-200">
-          <th>{{ loop.index }}</th>
           <td class="text-green-600 font-bold">{{approved_item.title}}</td>
           <td>${{approved_item.yearly_price}}</td>
           <td>${{approved_item.month_price}}</td>
           <td>{{approved_item.purchased_date}}</td>
+          <td>
+            <a
+              href="/removeoption?approved_item={{approved_item.id}}"
+              class="btn btn-sm bg-blue-500 text-white"
+            >
+              Request Removal
+            </a>
+          </td>
         </tr>
-        {% endfor %}
-
-        {% for pending_item in pending %}
+        {% endfor %} {% for pending_item in pending %}
         <tr class="bg-base-200">
-          <th>{{ loop.index }}</th>
           <td class="text-yellow-600 font-bold">{{pending_item.title}}</td>
           <td>${{pending_item.yearly_price}}</td>
           <td>${{pending_item.month_price}}</td>
           <td>{{pending_item.purchased_date}}</td>
+          <td>
+            <a
+              href="/removeoption?pending_item={{pending_item.id}}"
+              class="btn btn-sm bg-blue-500 text-white"
+            >
+              Request Removal
+            </a>
+          </td>
         </tr>
-        {% endfor %}
-
-        {% for declined_item in declined %}
+        {% endfor %} {% for declined_item in declined %}
         <tr class="bg-base-200">
-          <th>{{ loop.index }}</th>
           <td class="text-red-500 font-bold">{{declined_item.title}}</td>
           <td>${{declined_item.yearly_price}}</td>
           <td>${{declined_item.month_price}}</td>
           <td>{{declined_item.purchased_date}}</td>
+          <td>
+            <a
+              href="/removeoption?declined_item={{declined_item.id}}"
+              class="btn btn-sm bg-blue-500 text-white"
+            >
+              Request Removal
+            </a>
+          </td>
         </tr>
         {% endfor %}
-
-
-
       </tbody>
     </table>
 
-    {% endif %} {% endblock %}
+    {% else %}
+    <div class="mx-auto flex flex-col gap-2 justify-center items-center">
+      <h1 class="h3 text-center">
+        You have no outgoing insurance requests. Please visit our product page
+        to select any options
+      </h1>
+      <a href="/products" class="btn btn-md mx-auto">Products</a>
+    </div>
+    {% endif %}
+
+    <!-- if discount is not 0, show discount -->
+
+    <!-- Show bundle -->
+
+ {% endif %} {% endblock %}
   </div>
 </div>

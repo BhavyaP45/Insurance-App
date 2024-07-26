@@ -1,6 +1,367 @@
-{% extends "base.html" %}
+{% extends "base.html" %} {% block title %}ICS Insurance{% endblock %} {% block
+body %}
 
-{% block title %}Changed{% endblock %}
+<dialog id="my_modal_3" class="modal">
+  <div class="modal-box">
+    <form method="dialog">
+      <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+        ✕
+      </button>
+    </form>
+    <h3 class="text-lg font-bold">Hello!</h3>
+    <p class="py-4">
+      We have added a theme selector to our website! Check it out!
+    </p>
+  </div>
+</dialog>
 
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 
-{% block body %} Home Page, welcome! {% endblock %}
+  body,
+  menu,
+  h1,
+  h2,
+  h3,
+  p {
+    font-family: "Poppins", sans-serif;
+  }
+
+  .navbar-end {
+    padding-right: 10px;
+    margin-bottom: 10px;
+  }
+
+  .menu {
+    margin-top: 7px;
+    margin-right: 8px;
+  }
+
+  .swap {
+    margin-bottom: 3px;
+  }
+
+  .openingtext {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-top: 65px;
+    justify-content: center;
+    align-items: center;
+    margin: 20px 0 0 0;
+    text-align: center;
+  }
+
+  .fillertext {
+    font-size: 1.4rem;
+    font-weight: 500;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .aboutus-open {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+
+  .aboutus-fill {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .aboutus img {
+    max-width: 400px;
+    margin-left: 150px;
+  }
+
+  .aboutus {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-self: center;
+    margin: 50;
+    z-index: 1;
+    max-width: 1300px;
+    gap: 75px;
+    padding: 70px 0 0 100px;
+  }
+
+  .lifetimestats {
+    font-size: 2.35rem;
+    font-weight: 700;
+    margin-top: 85px;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  .stats {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+
+  .endorsemessage {
+    font-size: 2.35rem;
+    font-weight: 700;
+    justify-content: center;
+    align-items: center;
+    margin: 85px 10px 0 0;
+    text-align: center;
+  }
+
+  .images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 75px;
+    padding: 1.5rem;
+    margin-bottom: 25px;
+  }
+
+  .second-images {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 100px;
+    padding: 1rem;
+    margin-bottom: 85px;
+  }
+
+  .images img {
+    max-width: 150px;
+  }
+
+  .second-images img {
+    max-width: 200px;
+  }
+
+  .getstarted-content {
+    padding-right: 65px;
+  }
+
+  .getstarted-open {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+
+  .getstarted-fill {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+
+  .getstarted img {
+    max-width: 500px;
+    padding-left: 50px;
+  }
+
+  .getstarted {
+    background: rgb(182, 219, 130);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    justify-self: center;
+    margin-top: 50px;
+    z-index: 1;
+    max-width: 2000px;
+    padding: 50px 0 50px 50px;
+  }
+
+  .btn {
+    font-family: "Poppins", sans-serif;
+    margin: 22px 10px 5px 0;
+  }
+
+  label {
+    margin-top: 10px;
+    padding-right: 15px;
+  }
+
+  .navbar-start {
+    font-size: 72px;
+    background: -webkit-linear-gradient(top right, #664ac1, #b45faa);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 10px;
+  }
+
+  .p-2 {
+    justify-content: center;
+    align-items: center;
+  }
+</style>
+<!-- 
+<div class="navbar bg-base-100">
+  <div class="navbar-start">
+    <div class="dropdown">
+      <div tabindex="0" role="button" class="btn btn-ghost lg:hidden">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          class="h-5 w-5"
+          fill="none"
+          viewBox="0 0 24 24"
+          stroke="currentColor"
+        >
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4 6h16M4 12h8m-8 6h16"
+          />
+        </svg>
+      </div>
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+      >
+        <li><a>Item 1</a></li>
+        <li>
+          <a>Parent</a>
+          <ul class="p-2">
+            <li><a>Submenu 1</a></li>
+            <li><a>Submenu 2</a></li>
+          </ul>
+        </li>
+        <li><a>Item 3</a></li>
+      </ul>
+    </div>
+    <a href="index.html" class="btn btn-ghost text-xl">ICS Insurance</a>
+  </div>
+  <div class="navbar-center hidden lg:flex">
+    <ul class="menu menu-horizontal px-1">
+      <li><a>Products</a></li>
+      <li>
+        <details>
+          <summary>Coverages</summary>
+          <ul class="p-2">
+            <li><a>Home</a></li>
+            <li><a>Auto</a></li>
+            <li><a>Travel</a></li>
+            <li><a>Life</a></li>
+            <li><a>Health</a></li>
+          </ul>
+        </details>
+      </li>
+    </ul>
+  </div>
+  <div class="navbar-end">
+    <a href="register.html" class="btn btn-primary btn-outline">Sign Up</a>
+    <a href="login.html" class="btn btn-secondary btn-outline">Login</a>
+  </div>
+</div> -->
+
+<div
+  class="hero min-h-screen"
+  style="
+    background-image: url('https://images.pexels.com/photos/933054/pexels-photo-933054.jpeg?cs=srgb&dl=pexels-joyston-judah-331625-933054.jpg&fm=jpg');
+    background-position: 0% 20%;
+  "
+>
+  <div class="hero-overlay bg-opacity-60"></div>
+  <div class="hero-content text-neutral-content text-center">
+    <div class="openingtext max-w-md">
+      <h1 class="mb-5 text-5xl font-bold">ICS Insurance</h1>
+      <p class="fillertext mb-5">Providing you with the care you need.</p>
+    </div>
+  </div>
+</div>
+
+<div class="aboutus">
+  <div class="aboutus-content">
+    <h2 class="aboutus-open font-bold mb-4">About Us</h2>
+    <p class="aboutus-fill">
+      Here at ICS Insurance, we strive to empower all of our clients, and give
+      them the reassurance of safety within their lives. From car insurance to
+      home insurance, ICS Insurance will do whatever it takes to keep you and
+      your loved ones safe and protected.
+      <br />
+      <br />
+      Our team will ensure you get the coverage you need. We will assess your
+      needs, help you with selecting a plan, and take care of you for life.
+      Simply sign up or login today!
+    </p>
+    <a href="register.html" class="btn btn-primary btn-outline">Sign Up</a>
+    <a href="login.html" class="btn btn-secondary btn-outline">Login</a>
+  </div>
+  <img
+    src="https://hips.hearstapps.com/hmg-prod/images/father-son-quotes-1619064384.jpg?crop=0.670xw:1.00xh;0.260xw,0&resize=1200:*"
+  />
+</div>
+
+<div>
+  <h3 class="lifetimestats font-bold mb-4">Lifetime Stats</h3>
+</div>
+<div class="flex justify-center mt-10">
+  <div style="color: rgb(98, 124, 206);" class="stats stats-vertical lg:stats-horizontal shadow">
+    <div class="stat">
+      <div class="stat-title">Registered Clients</div>
+      <div class="stat-value">1.1M</div>
+    </div>
+
+    <div style="color: #9a5dc9;" class="stat">
+      <div class="stat-title">Satisfaction Rate</div>
+      <div class="stat-value">98%</div>
+    </div>
+
+    <div style="color: #58b75b;" class="stat">
+      <div class="stat-title">Money Saved</div>
+      <div class="stat-value">$2.3B</div>
+    </div>
+
+    <div class="stat">
+      <div class="stat-title">Reviews</div>
+      <div style="color: rgb(225, 180, 16)" class="stat-value">★★★★★</div>
+      <div class="stat-desc">31,340 reviews</div>
+    </div>
+  </div>
+</div>
+
+<div class="endorsements">
+  <h3 class="endorsemessage font-bold mb-4">Endorsed by</h3>
+  <div class="images">
+    <img
+      src="https://rolandcorp.com.au/blog/wp-content/uploads/2023/10/forbes-logo-transparent-free-png.webp"
+    />
+    <img src="https://cdn.finanso.com/files/23/02/cibc.png" />
+    <img src="https://cdn.freebiesupply.com/logos/thumbs/2x/wired-logo.png" />
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Toronto-Dominion_Bank_logo.svg"
+    />
+  </div>
+  <div class="second-images">
+    <img
+      src="https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a5dc234d-7ffc-47f2-8007-1361d649fc7e/dfq9d8h-a9bb48f5-1444-49fc-adeb-cbf4ce30f071.png/v1/fill/w_1024,h_275/what_if__cnbc_logo_in_2023_by_poppythelogomaker_dfq9d8h-fullview.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9Mjc1IiwicGF0aCI6IlwvZlwvYTVkYzIzNGQtN2ZmYy00N2YyLTgwMDctMTM2MWQ2NDlmYzdlXC9kZnE5ZDhoLWE5YmI0OGY1LTE0NDQtNDlmYy1hZGViLWNiZjRjZTMwZjA3MS5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.TdQ-0Y6poLathnUlrEU2nNdPwdRSEoZdAayA8D_9-aE"
+    />
+    <img src="https://cdn.worldvectorlogo.com/logos/business-insider-2.svg" />
+    <img
+      src="https://cdn.freebiesupply.com/logos/large/2x/bloomberg-business-logo-png-transparent.png"
+    />
+    <img
+      src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/FORTUNE-LOGO-2016.png/1200px-FORTUNE-LOGO-2016.png"
+    />
+  </div>
+</div>
+
+<div class="getstarted">
+  <img src="{{ url_for('static', filename='images/phone.svg') }}" />
+  <div class="getstarted-content">
+    <h2 class="getstarted-open font-bold mb-4">Get Started Today!</h2>
+    <p class="getstarted-fill">
+      To get started with ICS Insurance and explore our products, click the
+      button below. Also download our mobile app on iOS and Android!
+    </p>
+    <div class="getstarted-buttons">
+      <a href="/products" class="btn btn-primary btn-outline">View Coverages</a>
+    </div>
+  </div>
+</div>
+
+<footer class="footer footer-center bg-base-300 text-base-content p-4">
+  <aside>
+    <p>Copyright © 2024 - All rights reserved by ICS Insurance LTD.</p>
+  </aside>
+</footer>
+
+{% endblock %}

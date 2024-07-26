@@ -1,20 +1,12 @@
 {% extends "base.html" %} {%block head%} {%endblock %} {% block body %} {% if
 current_user.is_authenticated %}
-<p>Welcome back, {{ current_user.username }}!</p>
-<button>
-  <a href="/Dashboard">Dashboard</a>
-</button>
-<h1>CHECKOUT</h1>
-<!-- <ul class="list-group list-group-flush" id="notes">
-  {% for cart_item in cart_items %}
-  <li class="list-group-item">{{ cart_item.title }}</li>
-  <a></a>
-  {% endfor %}
-</ul> -->
+
+<h1 class="h1">CHECKOUT</h1>
 <div class="w-5/6 mx-auto px-4">
   <div class="overflow-x-auto">
     <table class="table">
       <!-- head -->
+      {% if cart_items %}
       <thead>
         <tr>
           <th>#</th>
@@ -46,13 +38,33 @@ current_user.is_authenticated %}
         {% endfor %}
       </tbody>
     </table>
-
-    <div class="flex justify-end">
+    <div class="flex justify-end gap-4">
       <a href="/products" class="btn btn-primary">Add More</a>
       <form method="POST">
         <button type="submit" class="btn btn-primary">Checkout</button>
       </form>
     </div>
+    {% else %}
+    <div class="mx-auto flex flex-col gap-2 justify-center items-center">
+      <h1 class="h3 text-center">
+        You have no items in your cart. Please visit our product page
+        to select any options
+      </h1>
+      <a href="/products" class="btn btn-md mx-auto">Products</a>
+    </div>
+
+    {% endif %}
+
+
+    <div class="p-2">
+      {% if approved_types != 0 and discount != 0 %}
+      <p>Your Current Bundle: {{ approved_types }}</p>
+      <p>Bundle Discount: {{ discount }}%</p>
+      {% else %} {% endif %}
+      <p>Monthly Total (with tax): ${{ monthly_total }}</p>
+      <p>Yearly Total (with tax): ${{ yearly_total }}</p>
+      {% endif %}
+    </div>
   </div>
-  {% endif %} {% endblock %}
+  {% endblock %}
 </div>
