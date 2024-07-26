@@ -63,18 +63,18 @@
             <label for="Username" class="block text-sm font-medium text-gray-700">
               Username
             </label>
-            {{ form.username(class = "mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm", placeholder = "Username") }}
+            {{ form.username(class = "mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm px-4 py-1", placeholder = "Username") }}
           </div>
 
           <div class="col-span-6 my-4">
             <label for="Email" class="block text-sm font-medium text-gray-700"> Email </label>
-            {{ form.email_address(class = "mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm", placeholder = "Email Address") }}
+            {{ form.email_address(class = "mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm px-4 py-1", placeholder = "Email Address") }}
           </div>
 
           <div class="col-span-6 sm:col-span-3 my-4">
             <label for="Password" class="block text-sm font-medium text-gray-700"> Password </label>
 
-           {{ form.password(class = "mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm", placeholder = "Password") }}
+           {{ form.password(class = "mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm px-4 py-1", placeholder = "Password") }}
           </div>
 
           <div class="col-span-6 sm:col-span-3 my-4">
@@ -82,7 +82,7 @@
               Password Confirmation
               
             </label>
-            {{ form.password_confirm(class = "mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm", placeholder = "Confirm Password") }}
+            {{ form.password_confirm(class = "mt-1 w-full rounded-md border-gray-200 bg-white text-sm text-gray-700 shadow-sm px-4 py-1", placeholder = "Confirm Password") }}
           </div>
 
           <div class="col-span-6">
@@ -105,9 +105,9 @@
           </div>
 
           <div class="col-span-6 items-center sm:flex sm:items-center sm:gap-4">
-            {{ form.submit(class = "inline-block shrink-0 rounded-md border border-blue-600 bg-blue-600 px-12 py-3 text-sm font-medium text-white transition hover:bg-transparent hover:text-blue-600 focus:outline-none focus:ring active:text-blue-500")}}
+            {{ form.submit(class = "btn btn-md")}}
               
-            <button class="btn mt-4 btn-sm btn-gray-500 sm:mt-0 ">
+            <button class=" ">
               Already have an account?
               <a href="/login" class="text-gray-700 underline">Log in</a>.
             </button>

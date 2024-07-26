@@ -1,4 +1,4 @@
-from docs import app, db, UserMixin, bcrypt, loginmanager, admin
+from docs import app, db, UserMixin, bcrypt, loginmanager
 from sqlalchemy.sql import func
 
 

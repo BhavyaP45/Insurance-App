@@ -21,6 +21,9 @@ current_user.is_authenticated %}
   {% endif %} {% if approved or declined or pending %} {% if pending and not
   approved and not declined%}
   <p class="text-lg my-1">Your current requests are still pending</p>
+  {% elif declined and not
+    approved and not pending %}
+    <p class="text-lg my-1">Your requests have been declined</p>
   {% endif %}
   <div
     class="text-lg my-2 flex-row flex justify-center gap-x-5 rounded-md border border-2 w-fit mx-auto px-4 border-pink-600"
@@ -60,7 +63,7 @@ current_user.is_authenticated %}
           <td>
             <a
               href="/removeoption?item_id={{approved_item.id}}"
-              class="btn btn-sm bg-blue-500 text-white"
+              class="btn btn-md lg:btn-sm bg-blue-500 text-white"
             >
               Request Removal
             </a>
@@ -142,6 +145,8 @@ current_user.is_authenticated %}
         >View Available Insurance Plans</a
       >
     </div>
-    {% endif %} {% endif %} {% endblock %}
+    {% endif %} {% endif %} 
   </div>
 </div>
+{% endblock %}
+
