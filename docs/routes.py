@@ -4,7 +4,7 @@ from docs.forms import RegisterForm, LoginForm
 from docs.models import User,Cart
 from flask import request
 from docs.models import Options, Purchases
-import requests
+import requests, random
 
 @app.route("/")
 def index_page():
@@ -68,6 +68,15 @@ def logout_page():
 @login_required #Require login before the route is set up
 @app.route("/dashboard", methods = ["POST", "GET"])
 def dashboard_page():
+  list_of_messages = [
+    "Insure your assets today.",
+    "Protect you and your loved ones today.",
+    "Expect the unexpected with ICS-Insurance.",
+    "Be prepared for anything that comes your way.",
+    "Remain adaptable.",
+  ]
+  display_message = random.choice(list_of_messages)
+  
   if not current_user.is_authenticated:
     return redirect(url_for("login_page"))
   approved = Purchases.query.filter_by(owner = current_user.id, status = "APPROVED").all()
@@ -114,7 +123,7 @@ def dashboard_page():
   else:
     approved_types = 0
 
-  return render_template("dashboard.html", cart_count = cart_count,approved_types=approved_types, discount=discount, user = current_user, approved = approved, pending = pending, declined = declined, monthly_total = monthly_total, yearly_total = yearly_total)
+  return render_template("dashboard.html", cart_count = cart_count,approved_types=approved_types, discount=discount, user = current_user, approved = approved, pending = pending, declined = declined, monthly_total = monthly_total, yearly_total = yearly_total, display_message = display_message)
 
 @login_required
 @app.route("/products", methods = ["POST", "GET"])

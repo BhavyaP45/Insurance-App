@@ -1,7 +1,7 @@
 {% extends "base.html" %} {%block head%} {%endblock %} {% block body %} {% if
 current_user.is_authenticated %}
 
-<h1 class="h1">CHECKOUT</h1>
+<h1 class="text-2xl font-bold my-4 mx-20">Checkout</h1>
 <div class="w-5/6 mx-auto px-4">
   <div class="overflow-x-auto">
     <table class="table">
@@ -56,13 +56,14 @@ current_user.is_authenticated %}
     {% endif %}
 
 
-    <div class="p-2">
+    <div class="p-2 m-4 w-3/4 mx-auto border">
       {% if approved_types != 0 and discount != 0 %}
-      <p>Your Current Bundle: {{ approved_types }}</p>
-      <p>Bundle Discount: {{ discount }}%</p>
+      
+      <p class="text-lg">Your Current Bundle: <span class="text-green-500">{{ approved_types }}</span></p>
+      <p class="text-lg">Bundle Discount: <span class="text-green-500">{{ discount }}%</span></p>
       {% else %} {% endif %}
-      <p>Monthly Total (with tax): ${{ monthly_total }}</p>
-      <p>Yearly Total (with tax): ${{ yearly_total }}</p>
+      <p class="text-lg">Monthly Total (with tax): ${{ monthly_total }}</p>
+      <p class="text-lg">Yearly Total (with tax): ${{ yearly_total }}</p>
       {% endif %}
     </div>
   </div>
