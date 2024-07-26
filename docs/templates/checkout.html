@@ -1,0 +1,58 @@
+{% extends "base.html" %} {%block head%} {%endblock %} {% block body %} {% if
+current_user.is_authenticated %}
+<p>Welcome back, {{ current_user.username }}!</p>
+<button>
+  <a href="/Dashboard">Dashboard</a>
+</button>
+<h1>CHECKOUT</h1>
+<!-- <ul class="list-group list-group-flush" id="notes">
+  {% for cart_item in cart_items %}
+  <li class="list-group-item">{{ cart_item.title }}</li>
+  <a></a>
+  {% endfor %}
+</ul> -->
+<div class="w-5/6 mx-auto px-4">
+  <div class="overflow-x-auto">
+    <table class="table">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>Title</th>
+          <th>Information</th>
+          <th>Yearly Price</th>
+          <th>Monthly Price</th>
+          <th></th>
+        </tr>
+      </thead>
+      {% set count = 1 %} {% for cart_item in cart_items %}
+      <tbody>
+        <!-- row template -->
+        <tr class="bg-base-200">
+          <th>{{ loop.index }}</th>
+          <td class="text-{{cart_item.colour}}-500">{{cart_item.title}}</td>
+          <td>{{cart_item.mini_description}}</td>
+          <td>${{cart_item.yearly_price}}</td>
+          <td>${{cart_item.month_price}}</td>
+          <td>
+            <a
+              href="/delete?cart_item_id={{cart_item.id}}"
+              class="btn btn-sm bg-{{cart_item.colour}}-500 text-white"
+            >
+              Remove
+            </a>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+
+    <div class="flex justify-end">
+      <a href="/products" class="btn btn-primary">Add More</a>
+      <form method="POST">
+        <button type="submit" class="btn btn-primary">Checkout</button>
+      </form>
+    </div>
+  </div>
+  {% endif %} {% endblock %}
+</div>
