@@ -153,11 +153,12 @@
               {% endif %}
             </div>
           </div>
+          {% if current_user.is_authenticated %}
           <a
             href="/cart?product_id={{option.id}}"
             class="btn btn-sm bg-{{option.colour}}-500 mb-4 text-white w-3/4 mx-auto border border-{{option.colour}}-500 mb-2 hover:btn-outline hover:text-{{option.colour}}-500"
-            >Add to Cart</a
-          >
+            >Add to Cart</a>
+            {% endif %}
         </div>
         {% endfor %}
       </div>
