@@ -2,7 +2,8 @@
 
 <form method="POST">
   {{ form.hidden_tag()}}
-  <!--Prevents Cross Site Request Forgery -->
+  <!--Prevents Cross Site Request Forgery-->
+  <!-- Login title and description -->
   <section class="relative flex flex-wrap lg:h-screen lg:items-center">
     <div class="w-full px-4 py-12 sm:px-6 sm:py-16 lg:w-1/2 lg:px-8 lg:py-24">
       <div class="mx-auto max-w-lg text-center">
@@ -13,7 +14,7 @@
           You may manage your insurance requests from here.
         </p>
       </div>
-
+      <!--Prompt the user for their username-->
       <form action="#" class="mx-auto mb-0 mt-8 max-w-md space-y-4">
         <div>
           <div class="my-8"></div>
@@ -25,6 +26,7 @@
           </div>
         </div>
 
+        <!--Get the user's password-->
         <div>
           <label for="password" class="sr-only">Password</label>
 
@@ -33,7 +35,7 @@
             pe-12 text-sm shadow-sm", placeholder = "Password") }}
           </div>
         </div>
-
+        <!-- Redirection to sign up page -->
         <div class="flex items-center justify-between mt-4">
           <p class="text-sm text-gray-500">
             No account?
@@ -46,7 +48,7 @@
         </div>
       </form>
     </div>
-
+    <!-- Background image for login page -->
     <div class="relative h-64 w-full sm:h-96 lg:h-full lg:w-1/2">
       <img
         alt=""
