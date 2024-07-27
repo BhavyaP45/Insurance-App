@@ -337,7 +337,7 @@ def remove_insurance_option():
       "replyTo": admin_email,
       "ishtml": "true",
       "title": f"Request to Remove {purchased_item.title} from User {request_user.username}",
-      "body": f"<a href=\"http://127.0.0.1:5000/admin/purchases/edit/?id={purchased_item_id}&url=/admin/purchases/\" target='_blank'>Visit Admin Panel</a>"
+      "body": f"<a href=\"https://anirudhbv.pythonanywhere.com/admin/purchases/edit/?id={purchased_item_id}&url=/admin/purchases/\" target='_blank'>Visit Admin Panel</a>"
     }
     headers = {
       "x-rapidapi-key": "110ab4fdfemsh81953e4f0a53476p1970f4jsn593bfac55618",
