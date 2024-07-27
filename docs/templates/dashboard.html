@@ -1,6 +1,7 @@
 {% extends "base.html" %} {%block head%} {%endblock %} {% block body %} {% if
 current_user.is_authenticated %}
 
+<!--Creating a hero screen-->
 <div class="hero bg-base-200 min-h-[250px]">
   <div class="hero-content text-center">
     <div class="max-w-md">
@@ -15,6 +16,7 @@ current_user.is_authenticated %}
 <div
   class="totals text-lg mx-auto flex flex-col gap-y-3 text-center my-2 font-bold border border-2 border-pink-600"
 >
+<!--Proving user with purchase/product information-->
   {% if approved_types != 0 and discount != 0 and approved %}
   <p>Your Current Bundle: {{ approved_types }}</p>
   <p>Bundle Discount: {{ discount }}%</p>

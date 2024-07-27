@@ -1,6 +1,7 @@
 {% extends "base.html" %} {% block title %}ICS Insurance{% endblock %} {% block
 body %}
 
+<!--Adding all styling for the landing page-->
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap");
 
@@ -164,6 +165,7 @@ label {
   align-items: center;
 }
 
+/* Making page responsive */
 @media (max-width: 768px) {
   .aboutus {
     grid-template-columns: 1fr;
@@ -215,6 +217,7 @@ label {
 }
 </style>
 
+<!--Creating hero screen-->
 <div
   class="hero min-h-screen"
   style="
@@ -231,6 +234,7 @@ label {
   </div>
 </div>
 
+<!--Creating About Us section-->
 <div class="aboutus mx-auto my-2">
   <div class="aboutus-content">
     <h2 class="aboutus-open font-bold mb-4">About Us</h2>
@@ -253,6 +257,7 @@ label {
   />
 </div>
 
+<!--Adding section for lifetime stats-->
 <div>
   <h3 class="lifetimestats font-bold mb-4">Lifetime Stats</h3>
 </div>
@@ -284,6 +289,7 @@ label {
   </div>
 </div>
 
+<!--Adding section for companies that endorse us-->
 <div class="endorsements">
   <h3 class="endorsemessage font-bold">Endorsed by</h3>
   <div class="images">
@@ -310,6 +316,7 @@ label {
   </div>
 </div>
 
+<!--Adding chatbot to the landing page-->
 <div class="container mx-auto px-4 py-2 pb-8 my-4 flex flex-col items-center">
   <div class="p-4 text-center font-semibold gap-2">
     <h1 class="endorsemessage">
@@ -327,6 +334,7 @@ label {
   </iframe>
 </div>
 
+<!--Adding section for user to get started and see our plans-->
 <div class="getstarted">
   <img src="{{ url_for('static', filename='images/phone.svg') }}" />
   <div class="getstarted-content">
